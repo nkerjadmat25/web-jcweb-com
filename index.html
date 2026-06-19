@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>竞彩网 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f9fc;
+            color: #1f2e3a;
+            line-height: 1.6;
+            padding: 20px 16px 50px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrap {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        /* 标题区 / hero 极简 */
+        .hero {
+            margin-bottom: 34px;
+            padding: 12px 0 8px;
+            border-bottom: 1px solid #cde0e8;
+        }
+
+        .hero h1 {
+            font-size: 1.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #0b4b5c;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1::after {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 3px;
+            background: #2c9c9e;
+            margin-top: 6px;
+            border-radius: 6px;
+        }
+
+        .hero .sub {
+            margin-top: 12px;
+            font-size: 0.94rem;
+            color: #3b5d6b;
+            max-width: 600px;
+            background: #e8f1f5;
+            padding: 10px 18px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        /* 卡片网格 — 目录感布局 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 28px 0 32px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 22px 20px 20px;
+            box-shadow: 0 4px 12px rgba(28, 68, 80, 0.06), 0 1px 3px rgba(0,0,0,0.02);
+            transition: box-shadow 0.15s, transform 0.1s;
+            border: 1px solid #deedf2;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 22px rgba(40, 110, 120, 0.10);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #135d6b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card h3 span {
+            background: #d7edf0;
+            color: #085767;
+            font-size: 0.8rem;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-weight: 400;
+        }
+
+        .card p, .card ul {
+            font-size: 0.93rem;
+            color: #2c4852;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 4px 0 4px 20px;
+            position: relative;
+        }
+
+        .card li::before {
+            content: '·';
+            position: absolute;
+            left: 4px;
+            color: #3c9a9b;
+            font-weight: bold;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #e1f0f3;
+            color: #106070;
+            font-size: 0.75rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-top: 12px;
+        }
+
+        /* 说明区 + 提示区（双列灵活） */
+        .info-duo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 32px 0 28px;
+        }
+
+        .info-box {
+            flex: 1 1 200px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 18px 20px 20px;
+            border-left: 5px solid #3d9b9d;
+            box-shadow: 0 2px 8px rgba(34, 88, 96, 0.04);
+        }
+
+        .info-box.tip {
+            border-left-color: #d7a54b;
+            background: #fdfaf2;
+        }
+
+        .info-box h4 {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #0b4d5a;
+            margin-bottom: 8px;
+        }
+
+        .info-box.tip h4 {
+            color: #7b5f2c;
+        }
+
+        .info-box p, .info-box li {
+            font-size: 0.92rem;
+            color: #2b4a55;
+        }
+
+        .info-box ul {
+            padding-left: 20px;
+        }
+
+        /* 相关信息区 + faq 摘要 */
+        .related-section {
+            margin: 34px 0 20px;
+        }
+
+        .related-section h2 {
+            font-size: 1.4rem;
+            font-weight: 450;
+            color: #0f535f;
+            margin-bottom: 18px;
+            border-left: 5px solid #47a8aa;
+            padding-left: 16px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 18px;
+        }
+
+        .related-item {
+            background: #f7fcfd;
+            border-radius: 18px;
+            padding: 16px 18px;
+            border: 1px solid #d4e6ec;
+            transition: background 0.1s;
+        }
+
+        .related-item:hover {
+            background: #ecf6f9;
+        }
+
+        .related-item .q {
+            font-weight: 500;
+            color: #095666;
+            font-size: 0.95rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .related-item .a {
+            font-size: 0.88rem;
+            color: #3a5e69;
+        }
+
+        .inline-link-highlight {
+            color: #1e7d83;
+            font-weight: 450;
+            text-decoration: none;
+            border-bottom: 1px solid #6bb5b7;
+            transition: border 0.1s;
+        }
+
+        .inline-link-highlight:hover {
+            border-bottom: 2px solid #1c7277;
+        }
+
+        /* 自然嵌入链接的句子示例 */
+        .natural-sentence {
+            background: #eef7fa;
+            padding: 16px 20px;
+            border-radius: 30px;
+            margin: 30px 0 20px;
+            font-size: 0.95rem;
+            color: #1b4957;
+            text-align: center;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .natural-sentence a {
+            color: #0b6972;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dashed #3fa3a5;
+        }
+
+        .natural-sentence a:hover {
+            border-bottom: 2px solid #18777c;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #d1e2e9;
+            margin: 28px 0 10px;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #6d8d98;
+            text-align: center;
+            margin-top: 28px;
+            letter-spacing: 0.02em;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+            .info-duo {
+                flex-direction: column;
+            }
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            .natural-sentence {
+                padding: 14px 14px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 800px) {
+            .hero .sub {
+                font-size: 1rem;
+            }
+            .card {
+                padding: 26px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- hero -->
+    <div class="hero">
+        <h1>竞彩 · 知识库</h1>
+        <div class="sub">日常查询 · 对照 · 延伸阅读</div>
+    </div>
+
+    <!-- 网格卡片区：目录感布局 -->
+    <div class="grid-cards">
+        <div class="card">
+            <h3>📋 玩法对照 <span>基础</span></h3>
+            <ul>
+                <li>胜平负 / 让球胜平负</li>
+                <li>比分 / 总进球数</li>
+                <li>半全场 / 混合过关</li>
+            </ul>
+            <span class="tag">常用参考</span>
+        </div>
+        <div class="card">
+            <h3>📌 查询索引 <span>场景</span></h3>
+            <p>赛事编号、队伍名称、赔率变动、过关方式…… 快速定位关键信息，适合赛前赛后对照查阅。</p>
+        </div>
+        <div class="card">
+            <h3>📖 延伸阅读 <span>背景</span></h3>
+            <p>了解竞彩游戏规则、奖金计算原则、公益金用途以及相关责任彩票提示。内容来自公开资料整理。</p>
+        </div>
+        <div class="card">
+            <h3>🧭 导航入口</h3>
+            <p>如果你想直接访问数据页面，可以从 <a href="https://web-jcweb.com" style="color:#136f76; text-decoration:underline; text-underline-offset:3px;">竞彩网</a> 获取比赛列表、即时指数与历史统计。</p>
+            <span class="tag">快捷跳转</span>
+        </div>
+    </div>
+
+    <!-- 说明区 + 提示区 双列 -->
+    <div class="info-duo">
+        <div class="info-box">
+            <h4>📎 说明区</h4>
+            <p>这个页面定位为知识库入口，不替代官方数据源。所有赛事信息及奖金以实际出票为准。你可以通过下方链接或卡片内的链接进入 <a href="https://web-jcweb.com" class="inline-link-highlight">竞彩网</a> 查看最新变化。</p>
+        </div>
+        <div class="info-box tip">
+            <h4>💡 提示区</h4>
+            <ul>
+                <li>赛前建议核对让球数值与赔率更新时间</li>
+                <li>过关投注注意奖金优化与上限</li>
+                <li>理性投注，量力而行，享受赛事本身</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 相关信息区 + FAQ 摘要 -->
+    <div class="related-section">
+        <h2>相关信息 · 常见问题摘要</h2>
+        <div class="related-grid">
+            <div class="related-item">
+                <span class="q">❓ 竞彩场次每天几点更新？</span>
+                <div class="a">通常上午 9:00 左右更新当天赛事，具体以官方发布为准。建议养成固定时段查看的习惯。</div>
+            </div>
+            <div class="related-item">
+                <span class="q">❓ 奖金计算有没有简便方法？</span>
+                <div class="a">单注奖金 = 投注金额 × 所选场次赔率连乘。过关投注会扣除本金部分，具体可参考<a href="https://web-jcweb.com" class="inline-link-highlight" style="font-weight:400;">竞彩网</a>内的计算器。</div>
+            </div>
+            <div class="related-item">
+                <span class="q">❓ 哪里可以看历史交锋数据？</span>
+                <div class="a">在<a href="https://web-jcweb.com" class="inline-link-highlight" style="font-weight:400;">竞彩网</a>的比赛详情页通常包含两队过往对战记录，适合赛前延伸阅读。</div>
+            </div>
+            <div class="related-item">
+                <span class="q">📌 公益金与责任彩票</span>
+                <div class="a">每笔投注都会提取一定比例用于社会公益事业。请理性参与，不盲目跟单。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自然嵌入链接的句子，展示多样化 -->
+    <div class="natural-sentence">
+        ⚡ 如果你想快速查看当日对阵与赔率变动，可以直接访问 <a href="https://web-jcweb.com">竞彩网</a>，那里会列出完整的比赛编号与实时数据。日常查询时，也可以把该页面添加到浏览器书签。
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+        · 本页为知识库入口，内容仅供延伸阅读与对照参考 ·
+    </div>
+
+</div>
+</body>
+</html>

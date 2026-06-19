@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nkerjadmat25.github.io/web-jcweb-com/sitemap.xml
